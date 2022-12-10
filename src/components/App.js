@@ -30,6 +30,7 @@ export class App extends React.Component {
   render() {
     const feedbackType = Object.keys(this.state);
     const totalFeedback = this.totalFeedbackCounter();
+    const { Good, Neutral, Bad } = this.state;
     return (
       <>
         <AppHeader>
@@ -46,9 +47,9 @@ export class App extends React.Component {
             <Notification message="There are no feedbacks" />
           ) : (
             <Statistics
-              good={this.state.Good}
-              neutral={this.state.Neutral}
-              bad={this.state.Bad}
+              good={Good}
+              neutral={Neutral}
+              bad={Bad}
               total={this.totalFeedbackCounter()}
               positive={this.positiveFeedbackCounter()}
             />
