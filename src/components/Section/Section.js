@@ -2,7 +2,7 @@ import React from 'react';
 import { AppSection, SectionHeading } from './Section.styled';
 import PropTypes from 'prop-types';
 
-export function Section({ title, children }) {
+export default function Section({ title, children }) {
   return (
     <AppSection>
       <SectionHeading>{title}</SectionHeading>

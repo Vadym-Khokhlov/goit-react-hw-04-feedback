@@ -1,7 +1,7 @@
 import { ButtonPanel, FeedbackButton } from './FeedbackOptions.styled';
 import PropTypes from 'prop-types';
 
-export function FeedbackOptions({ options, counter }) {
+export default function FeedbackOptions({ options, counter }) {
   return (
     <ButtonPanel>
       {options.map(item => (

@@ -1,7 +1,7 @@
 import { StatList } from './Statistics.styled';
 import PropTypes from 'prop-types';
 
-export function Statistics({ good, neutral, bad, total, positive }) {
+export default function Statistics({ good, neutral, bad, total, positive }) {
   return (
     <StatList>
       <li>Good: {good}</li>

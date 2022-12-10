@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { FeedbackOptions } from './FeedbackOpotions/FeedbackOptions';
-import { Statistics } from './Statistics/Statistics';
-import { Section } from './Section/Section';
-import { Notification } from './Notification/Notification';
+import FeedbackOptions from './FeedbackOpotions';
+import Statistics from './Statistics';
+import Section from './Section';
+import Notification from './Notification';
 import { AppHeader, AppHeading } from './App.styled';
 
 export class App extends React.Component {
