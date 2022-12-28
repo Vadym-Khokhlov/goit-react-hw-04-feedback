@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FeedbackOptions from './FeedbackOpotions';
+import FeedbackOptions from './FeedbackOptions';
 import Statistics from './Statistics';
 import Section from './Section';
 import Notification from './Notification';
@@ -18,19 +18,19 @@ export class App extends React.Component {
   };
 
   totalFeedbackCounter = () => {
-    return this.state.Good + this.state.Neutral + this.state.Bad;
+    return this.state.good + this.state.neutral + this.state.bad;
   };
 
   positiveFeedbackCounter = () => {
     return Math.round(
-      (this.state.Good * 100) / this.totalFeedbackCounter() || 0
+      (this.state.good * 100) / this.totalFeedbackCounter() || 0
     );
   };
 
   render() {
     const feedbackType = Object.keys(this.state);
     const totalFeedback = this.totalFeedbackCounter();
-    const { Good, Neutral, Bad } = this.state;
+    const { good, neutral, bad } = this.state;
     return (
       <>
         <AppHeader>
@@ -47,9 +47,9 @@ export class App extends React.Component {
             <Notification message="There are no feedbacks" />
           ) : (
             <Statistics
-              good={Good}
-              neutral={Neutral}
-              bad={Bad}
+              good={good}
+              neutral={neutral}
+              bad={bad}
               total={this.totalFeedbackCounter()}
               positive={this.positiveFeedbackCounter()}
             />
