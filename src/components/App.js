@@ -8,9 +8,9 @@ import { AppHeader, AppHeading } from './App.styled';
 
 export class App extends React.Component {
   state = {
-    Good: 0,
-    Neutral: 0,
-    Bad: 0,
+    good: 0,
+    neutral: 0,
+    bad: 0,
   };
 
   feedbackCounter = type => {
