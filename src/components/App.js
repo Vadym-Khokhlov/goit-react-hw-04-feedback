@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import FeedbackOptions from './FeedbackOptions';
 import Statistics from './Statistics';
@@ -6,60 +6,65 @@ import Section from './Section';
 import Notification from './Notification';
 import { AppHeader, AppHeading } from './App.styled';
 
-export class App extends React.Component {
-  state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
+export function App() {
+  const [good, setCountGood] = useState(0);
+  const [neutral, setCountNeutral] = useState(0);
+  const [bad, setCountBad] = useState(0);
+
+  const totalFeedbackCounter = () => {
+    return good + neutral + bad;
   };
 
-  feedbackCounter = type => {
-    this.setState(prevState => ({ [type]: prevState[type] + 1 }));
+  const positiveFeedbackCounter = () => {
+    return Math.round((good * 100) / totalFeedbackCounter() || 0);
   };
 
-  totalFeedbackCounter = () => {
-    return this.state.good + this.state.neutral + this.state.bad;
-  };
+  function feedbackCounter(feedbackType) {
+    switch (feedbackType) {
+      case 'good':
+        setCountGood(prevState => prevState + 1);
+        break;
 
-  positiveFeedbackCounter = () => {
-    return Math.round(
-      (this.state.good * 100) / this.totalFeedbackCounter() || 0
-    );
-  };
+      case 'neutral':
+        setCountNeutral(prevState => prevState + 1);
+        break;
 
-  render() {
-    const feedbackType = Object.keys(this.state);
-    const totalFeedback = this.totalFeedbackCounter();
-    const { good, neutral, bad } = this.state;
-    return (
-      <>
-        <AppHeader>
-          <AppHeading>Espresso</AppHeading>
-        </AppHeader>
-        <Section title="Please, leave your feedback">
-          <FeedbackOptions
-            options={feedbackType}
-            counter={this.feedbackCounter}
-          />
-        </Section>
-        <Section title="Statistics">
-          {totalFeedback <= 0 ? (
-            <Notification message="There are no feedbacks" />
-          ) : (
-            <Statistics
-              good={good}
-              neutral={neutral}
-              bad={bad}
-              total={this.totalFeedbackCounter()}
-              positive={this.positiveFeedbackCounter()}
-            />
-          )}
-        </Section>
-      </>
-    );
+      case 'bad':
+        setCountBad(prevState => prevState + 1);
+        break;
+
+      default:
+        break;
+    }
   }
-}
 
-// 1. Checking Props for Components
-// 2. Styled components stylization
-// 3. Refactoring
+  const totalFeedback = totalFeedbackCounter();
+  const feedbackType = { good, neutral, bad };
+
+  return (
+    <>
+      <AppHeader>
+        <AppHeading>Espresso</AppHeading>
+      </AppHeader>
+      <Section title="Please, leave your feedback">
+        <FeedbackOptions
+          options={Object.keys(feedbackType)}
+          counter={feedbackCounter}
+        />
+      </Section>
+      <Section title="Statistics">
+        {totalFeedback <= 0 ? (
+          <Notification message="There are no feedbacks" />
+        ) : (
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={totalFeedback}
+            positive={positiveFeedbackCounter()}
+          />
+        )}
+      </Section>
+    </>
+  );
+}
